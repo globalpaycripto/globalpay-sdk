@@ -51,7 +51,7 @@ class GlobalpayAPI
      * @param string $currency moneda cripto a recibir
      * @param string  transactionId ID único para referencia y consultas por parte del comercio
      * @param string $redirectUrl URL de destino después de realizada la transacción
-     * @param string $buyer_email Email address for the buyer of the transaction.
+     * @param string $buyerEmail Email address for the buyer of the transaction.
      *
      * @return array|object
      * La respuesta exitosa incluye los siguientes valores
@@ -66,14 +66,14 @@ class GlobalpayAPI
      *
      * @throws Exception
      */
-    public function CreateTransaction($amount, $currency, $transactionId, $redirectUrl, $buyer_email)
+    public function CreateTransaction($amount, $currency, $transactionId, $redirectUrl, $buyerEmail)
     {
         $fields = [
             'amount' => $amount,
             'currency' => $currency,
             'transactionId' => $transactionId,
             'redirectUrl' => $redirectUrl,
-            'buyer_email' => $buyer_email
+            'buyerEmail' => $buyerEmail
         ];
         return $this->request_handler->execute('createTransaction', $fields);
     }
