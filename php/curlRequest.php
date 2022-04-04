@@ -34,7 +34,7 @@ class CurlRequest
     {
         // Define the API url
         $api_url = 'https://globalpay.network/api/v1/public-api/' . $command;
-
+        
         // Set default field values
         $request = ["data" => $fields];
         $request['_version'] = 1;
@@ -43,7 +43,8 @@ class CurlRequest
 
         // Generate query string from fields
         $post_fields = json_encode($request);
-        $data_fields = json_encode($fields);
+        $data_fields = json_encode($fields, JSON_UNESCAPED_SLASHES, 512);
+        print_r($data_fields);
         // Generate the HMAC hash from the query string and private key
         $hmac = hash_hmac('sha512', $data_fields, $this->private_key);
 
