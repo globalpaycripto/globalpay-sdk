@@ -57,19 +57,19 @@ class GlobalpayAPI
      * La respuesta exitosa incluye los siguientes valores
      *      - amount            (string)
      *      - address           (string)
-     *      - txn_id            (string)
-     *      - confirms_needed   (string)
+     *      - txnId            (string)
+     *      - confirmsNeeded   (string)
      *      - timeout           (integer)
-     *      - checkout_url      (string)
-     *      - status_url        (string)
-     *      - qrcode_url        (string)
+     *      - checkoutUrl      (string)
+     *      - statusUrl        (string)
+     *      - qrcodeUrl        (string)
      *
      * @throws Exception
      */
     public function CreateTransaction($amount, $currency, $transactionId, $redirectUrl, $buyerEmail)
     {
         $fields = [
-            'amount' => $amount,
+            'amount' =>  sprintf("%.8f", $amount),
             'currency' => $currency,
             'transactionId' => $transactionId,
             'redirectUrl' => $redirectUrl,
@@ -85,13 +85,13 @@ class GlobalpayAPI
      * @return array|object
      * La respuesta exitosa incluye los siguientes valores:
      *          - Currency           (ejemplo string: BTC)
-     *          - rate_btc           (string)
-     *          - last_update        (string)
-     *          - tx_fee             (string)
+     *          - rateBtc           (string)
+     *          - lastUpdate        (string)
+     *          - txFee             (string)
      *          - status             (string)
      *          - name               (string)
      *          - confirms           (string)
-     *          - can_convert        (integer)
+     *          - canConvert        (integer)
      *
      * @throws Exception
      */
@@ -108,7 +108,9 @@ class GlobalpayAPI
      * Successful result includes the following values (sample) for each coin.
      *          - Currency          (ejemplo string: BTC)
      *          - balance           (string)
-     *          - coin_status       (string)
+     *          - status            (string)
+     *          - enabled           (boolean)
+     *          - name              (string)
      *
      * @throws Exception
      */
@@ -125,8 +127,8 @@ class GlobalpayAPI
      * function GetTransactions
      * Obtiene el historial de las transacciones
      *
-     * @param string $startDate fecha inicial
-     * @param string $endDate fecha final
+     * @param string $startDate ? | opcional fecha inicial
+     * @param string $endDate ? | opcional fecha final
      * @param string $currency ? | opcional moneda
      * @param string $transactionId ? | opcional ID de la transacción
      *
